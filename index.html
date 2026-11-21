@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Русская кофейня (красная цена)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #fdfbf7;
+            color: #3b2f2f;
+            line-height: 1.6;
+        }
+        header {
+            background-color: #4a3525;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+        header p {
+            font-size: 1rem;
+            color: #d2b48c;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .hero h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #4a3525;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #6f4e37;
+            color: #fff;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            text-align: center;
+        }
+        .btn:hover {
+            background-color: #583d2b;
+        }
+        .menu-section {
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+        .menu-section h3 {
+            border-bottom: 2px solid #f0e6d6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #4a3525;
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #e5d8c8;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .item-info {
+            display: flex;
+            justify-content: space-between;
+            width: 70%;
+            padding-right: 15px;
+        }
+        .price {
+            font-weight: bold;
+            color: #8b5a2b;
+        }
+        .btn-sm {
+            background-color: #8b5a2b;
+            color: #fff;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            transition: background 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn-sm:hover {
+            background-color: #6f4e37;
+        }
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .form-group label {
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        .form-group input, .form-group select {
+            padding: 10px;
+            border: 1px solid #d2b48c;
+            border-radius: 5px;
+            font-size: 1rem;
+            background-color: #fdfbf7;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #6f4e37;
+        }
+        .address-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        .contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .contact-item {
+            background: #fdfbf7;
+            padding: 12px 15px;
+            border: 1px dashed #d2b48c;
+            border-radius: 5px;
+        }
+        .notification-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .notification-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .notification-box {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            max-width: 90%;
+            width: 450px;
+        }
+        .notification-box h3 {
+            color: #4a3525;
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+        .order-summary {
+            text-align: left;
+            background: #fdfbf7;
+            border: 1px dashed #d2b48c;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+        .order-summary p {
+            margin-bottom: 6px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #4a3525;
+            color: #d2b48c;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>☕ Русская кофейня (красная цена)</h1>
+        <p>умерший кофе и работники душнилы</p>
+    </header>
+    <div class="container">
+        <section class="hero">
+            <h2>привет поцан!</h2>
+            <p>Мы воруем лучший гороховый суп в городе, отбираем хрустящие мякишы и создаем вайб, с которого хочется уйти побыстрее.</p>
+            <a href="#menu" class="btn" style="width: auto;">чем торгуем?</a>
+        </section>
+
+        <section id="menu" class="menu-section">
+            <h3>(не)Наше меню</h3>
+            <div class="menu-item">
+                <div class="item-info">
+                    <span>Экспрес едет</span>
+                    <span class="price">!67!.000 ₽</span>
+                </div>
+                <button type="button" class="btn-sm order-trigger" data-product="express">отдать душу</button>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <span>Руссикано</span>
+                    <span class="price">42?.000 ₽</span>
+                </div>
+                <button type="button" class="btn-sm order-trigger" data-product="russicano">отдать душу</button>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <span>Капча (3 мл)</span>
+                    <span class="price">24.000 ₽</span>
+                </div>
+                <button type="button" class="btn-sm order-trigger" data-product="captcha">отдать душу</button>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <span>Латинец</span>
+                    <span class="price">26.000 ₽</span>
+                </div>
+                <button type="button" class="btn-sm order-trigger" data-product="latin">отдать душу</button>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <span>Гаф собачий</span>
+                    <span class="price">=52=.000 ₽</span>
+                </div>
+                <button type="button" class="btn-sm order-trigger" data-product="gaf">отдать душу</button>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <span>Классический булка/мякиш</span>
+                    <span class="price">18+.000 ₽</span>
+                </div>
+                <button type="button" class="btn-sm order-trigger" data-product="crumbs">отдать душу</button>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <span>Жидковский горошкевый отвар (лучший обкрад)</span>
+                    <span class="price">99.000 ₽</span>
+                </div>
+                <button type="button" class="btn-sm order-trigger" data-product="soup">отдать душу</button>
+            </div>
+            <div class="menu-item">
+                <div class="item-info">
+                    <span>Чистый повареный мякиш (без хлеба)</span>
+                    <span class="price">50.000 ₽</span>
+                </div>
+                <button type="button" class="btn-sm order-trigger" data-product="pure_crumb">отдать душу</button>
+            </div>
+        </section>
+
+        <!-- Форма сбора данных -->
+        <section id="order-form-section" class="menu-section">
+            <h3>Сдать данные</h3>
+            <form class="order-form" id="spyForm">
+                <div class="form-group">
+                    <label for="coffee-select">как наорать на курьера?:</label>
+                    <select id="coffee-select" required>
+                        <option value="" disabled selected>-- Выберите грех --</option>
+                        <option value="express">Экспрес едет — !67!.000 ₽</option>
+                        <option value="russicano">Руссикано — 42?.000 ₽</option>
+                        <option value="captcha">Капча (3 мл) — 24.000 ₽</option>
+                        <option value="latin">Латинец — 26.000 ₽</option>
+                        <option value="gaf">Гаф собачий — =52=.000 ₽</option>
+                        <option value="crumbs">Классический булка/мякиш — 18+.000 ₽</option>
+                        <option value="soup">Жидковский горошкевый отвар — 99.000 ₽</option>
